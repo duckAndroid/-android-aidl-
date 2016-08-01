@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">IPCorService</string>
+    <string name="first_tip">我是首页，你看我都干了些什么</string>
+    <string name="normal_service">普通Service模式</string>
+    <string name="aidl_service">AIDL Service 模式</string>
+    <string name="result_of_normal_service">获取normal Service计算结果</string>
+    <string name="show_about_normal_service">显示service计算的结果:&#160;%1$s</string>
+</resources>
