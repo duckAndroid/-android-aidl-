@@ -17,6 +17,7 @@
         </activity>
 
         <service
+            android:process=":normal"
             android:name=".service.NormalService"
             android:enabled="true"
             android:exported="true" />

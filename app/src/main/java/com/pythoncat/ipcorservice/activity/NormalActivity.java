@@ -7,6 +7,8 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Process;
+import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -14,14 +16,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.apkfuns.logutils.LogUtils;
+import com.pythoncat.ipcorservice.NormalBinder;
 import com.pythoncat.ipcorservice.R;
 import com.pythoncat.ipcorservice.service.NormalService;
 import com.pythoncat.ipcorservice.utils.ToastHelper;
 
 public class NormalActivity extends AppCompatActivity {
     public boolean bind;
-    private NormalService.LocalBinder mBinder;
     private ServiceConnection mNormalConn;
+    private NormalBinder mBinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,13 @@ public class NormalActivity extends AppCompatActivity {
             LogUtils.w("execute normal service method...");
             LogUtils.w("execute normal service method...");
             if (bind) {
-                int result = mBinder.get().getResult();
+//                int result = mBinder.get().getResult();
+                int result = 0;
+                try {
+                    result = mBinder.getResult();
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
                 LogUtils.e("result=====" + result);
                 tvShowResult.setText(getString(R.string.show_about_normal_service, result));
             } else {
@@ -55,7 +64,8 @@ public class NormalActivity extends AppCompatActivity {
             public void onServiceConnected(ComponentName name, IBinder service) {
                 bind = true;
                 LogUtils.w("normal activity connected normal service...");
-                mBinder = (NormalService.LocalBinder) service;
+//                mBinder = (NormalService.LocalBinder) service;
+                mBinder = NormalBinder.Stub.asInterface(service);
             }
 
             @Override
@@ -66,6 +76,7 @@ public class NormalActivity extends AppCompatActivity {
             }
         };
 
+        int pid = Process.myPid();
         bindService(new Intent(this, NormalService.class), mNormalConn, BIND_AUTO_CREATE);
     }
 

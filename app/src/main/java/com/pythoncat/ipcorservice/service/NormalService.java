@@ -4,8 +4,10 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.os.RemoteException;
 
 import com.apkfuns.logutils.LogUtils;
+import com.pythoncat.ipcorservice.NormalBinder;
 
 import java.util.Random;
 
@@ -16,7 +18,8 @@ public class NormalService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         LogUtils.w("normal service bind");
-        return new LocalBinder();
+//        return new LocalBinder();
+        return new RemoteBinder();
     }
 
     @Override
@@ -64,5 +67,18 @@ public class NormalService extends Service {
      */
     public int getResult() {
         return new Random().nextInt(500);
+    }
+
+    public class RemoteBinder extends NormalBinder.Stub {
+
+        @Override
+        public void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat, double aDouble, String aString) throws RemoteException {
+
+        }
+
+        @Override
+        public int getResult() throws RemoteException {
+            return new Random().nextInt(500);
+        }
     }
 }
