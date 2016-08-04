@@ -87,6 +87,7 @@ public class NormalService extends Service {
         @Override
         public Student getStudent() throws RemoteException {
             if (this.stu != null) {
+                this.stu.name = this.stu.name+" hello pythonCat!";
                 return this.stu;
             } else {
                 Student stu = new Student();
