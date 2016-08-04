@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.apkfuns.logutils.LogUtils;
 import com.pythoncat.ipcorservice.NormalBinder;
 import com.pythoncat.ipcorservice.R;
+import com.pythoncat.ipcorservice.bean.Student;
 import com.pythoncat.ipcorservice.service.NormalService;
 import com.pythoncat.ipcorservice.utils.ToastHelper;
 
@@ -38,6 +39,8 @@ public class NormalActivity extends AppCompatActivity {
         upArrow.setColorFilter(getResources().getColor(R.color.colorWhite), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
         TextView tvShowResult = (TextView) findViewById(R.id.normal_show_tv);
+        TextView tvStudent = (TextView) findViewById(R.id.normal_show_stu_tv);
+        tvStudent.setText(getString(R.string.tip_student, ""));
         tvShowResult.setText(getString(R.string.show_about_normal_service, ""));
         Button btnExecute = (Button) findViewById(R.id.normal_ui_btn);
         btnExecute.setOnClickListener(v -> {
@@ -48,11 +51,14 @@ public class NormalActivity extends AppCompatActivity {
                 int result = 0;
                 try {
                     result = mBinder.getResult();
+                    Student stu = mBinder.getStudent();
+                    tvStudent.setText(getString(R.string.tip_student, stu.toString()));
+                    LogUtils.e("student========" + stu);
+                    LogUtils.e("result=====" + result);
+                    tvShowResult.setText(getString(R.string.show_about_normal_service, result));
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
-                LogUtils.e("result=====" + result);
-                tvShowResult.setText(getString(R.string.show_about_normal_service, result));
             } else {
                 LogUtils.e("bind service fail ,try again......");
                 bindService(new Intent(this, NormalService.class), mNormalConn, BIND_AUTO_CREATE);

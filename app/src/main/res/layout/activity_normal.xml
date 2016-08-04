@@ -10,14 +10,14 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        app:navigationIcon="@drawable/abc_ic_ab_back_mtrl_am_alpha"
-        app:titleTextColor="@color/colorWhite"
-        app:title="test toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
+        app:navigationIcon="@drawable/abc_ic_ab_back_mtrl_am_alpha"
         app:popupTheme="@style/AppTheme.NoActionbar"
-        app:theme="@style/AppTheme.NoActionbar" />
+        app:theme="@style/AppTheme.NoActionbar"
+        app:title="test toolbar"
+        app:titleTextColor="@color/colorWhite" />
 
     <TextView
         android:id="@+id/normal_show_tv"
@@ -26,6 +26,15 @@
         android:layout_marginLeft="10dp"
         android:padding="5dp"
         android:text="@string/show_about_normal_service"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/normal_show_stu_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:padding="5dp"
+        android:text="@string/tip_student"
         android:textSize="14sp" />
 
     <Button

@@ -8,6 +8,7 @@ import android.os.RemoteException;
 
 import com.apkfuns.logutils.LogUtils;
 import com.pythoncat.ipcorservice.NormalBinder;
+import com.pythoncat.ipcorservice.bean.Student;
 
 import java.util.Random;
 
@@ -69,7 +70,7 @@ public class NormalService extends Service {
         return new Random().nextInt(500);
     }
 
-    public class RemoteBinder extends NormalBinder.Stub {
+    public  class RemoteBinder extends NormalBinder.Stub {
 
         @Override
         public void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat, double aDouble, String aString) throws RemoteException {
@@ -80,5 +81,14 @@ public class NormalService extends Service {
         public int getResult() throws RemoteException {
             return new Random().nextInt(500);
         }
+
+        @Override
+        public Student getStudent() throws RemoteException {
+            Student stu = new Student();
+            stu.id = 10086;
+            stu.name = "pythonCat";
+            return stu;
+        }
+
     }
 }

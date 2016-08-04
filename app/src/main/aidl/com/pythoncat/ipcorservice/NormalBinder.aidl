@@ -1,6 +1,6 @@
 // NormalBinder.aidl
 package com.pythoncat.ipcorservice;
-
+import com.pythoncat.ipcorservice.bean.Student;
 // Declare any non-default types here with import statements
 
 interface NormalBinder {
@@ -11,4 +11,6 @@ interface NormalBinder {
     void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat,
             double aDouble, String aString);
     int getResult();
+
+    Student getStudent();
 }
