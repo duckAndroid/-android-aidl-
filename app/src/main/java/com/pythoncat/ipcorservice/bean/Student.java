@@ -22,6 +22,11 @@ public class Student implements Parcelable {
         dest.writeString(this.name);
     }
 
+    public void readFromParcel(Parcel in) {
+        this.id = in.readLong();          // 先读出 id，保持与写同顺序
+        this.name = in.readString();  // 其次读出 name，保持与写同顺序
+    }
+
     public Student() {
     }
 

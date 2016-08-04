@@ -13,4 +13,6 @@ interface NormalBinder {
     int getResult();
 
     Student getStudent();
+
+    void addStudent(inout Student s);
 }

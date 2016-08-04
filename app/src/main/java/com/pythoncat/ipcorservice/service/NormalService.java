@@ -70,7 +70,9 @@ public class NormalService extends Service {
         return new Random().nextInt(500);
     }
 
-    public  class RemoteBinder extends NormalBinder.Stub {
+    public class RemoteBinder extends NormalBinder.Stub {
+
+        private Student stu;
 
         @Override
         public void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat, double aDouble, String aString) throws RemoteException {
@@ -84,11 +86,19 @@ public class NormalService extends Service {
 
         @Override
         public Student getStudent() throws RemoteException {
-            Student stu = new Student();
-            stu.id = 10086;
-            stu.name = "pythonCat";
-            return stu;
+            if (this.stu != null) {
+                return this.stu;
+            } else {
+                Student stu = new Student();
+                stu.id = 10086;
+                stu.name = "pythonCat";
+                return stu;
+            }
         }
 
+        @Override
+        public void addStudent(Student s) throws RemoteException {
+            this.stu = s;
+        }
     }
 }

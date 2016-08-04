@@ -50,6 +50,10 @@ public class NormalActivity extends AppCompatActivity {
 //                int result = mBinder.get().getResult();
                 int result = 0;
                 try {
+                    Student s = new Student();
+                    s.name=this.toString();
+                    s.id=Thread.currentThread().getId();
+                    mBinder.addStudent(s);
                     result = mBinder.getResult();
                     Student stu = mBinder.getStudent();
                     tvStudent.setText(getString(R.string.tip_student, stu.toString()));
